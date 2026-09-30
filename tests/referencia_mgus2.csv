@@ -1,0 +1,12 @@
+# Referencia versionada para tests/run_tests.R; no editar a mano.
+# Generada con R version 4.3.3 (2024-02-29) y survival 3.5-8 llamando directamente a survfit() sobre survival::mgus2,
+# sin pasar por R/riesgos_competitivos.R. Tiempo en meses: etime = ifelse(pstat == 0, futime, ptime);
+# estado = ifelse(pstat == 0, 2 * death, 1). aj = incidencia acumulada de PCM (Aalen-Johansen, IC 95 % de survfit);
+# one_minus_km = 1 - Kaplan-Meier tratando la muerte como censura.
+time,n_risk,aj,aj_lower,aj_upper,one_minus_km
+60,874,0.0341037129743,0.0257495519743,0.0451682902988,0.0421538616850
+120,424,0.0637221680131,0.0517009060759,0.0785385596594,0.0952216593504
+180,178,0.0870562663515,0.0721800662075,0.1049984283649,0.1596310806208
+240,57,0.0998137159355,0.0823656279744,0.1209579545966,0.2095616244904
+300,16,0.1091516558306,0.0886172356450,0.1344443198193,0.2605046382966
+360,3,0.1340416443261,0.0998674943524,0.1799100150669,0.4248369408974

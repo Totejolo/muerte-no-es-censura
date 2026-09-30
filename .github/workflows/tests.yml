@@ -1,0 +1,55 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: ${{ matrix.os }} (R ${{ matrix.r }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, r: release}
+          - {os: windows-latest, r: release}
+          - {os: macos-latest, r: release}
+          # La versión anterior y la mínima que promete el README, con su survival.
+          - {os: ubuntu-latest, r: oldrel-1}
+          - {os: ubuntu-latest, r: "4.2"}
+    env:
+      # En CI la comparación con cmprsk::crr es obligatoria: si falta, el test falla.
+      REQUIRE_CMPRSK: "true"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.r }}
+          use-public-rspm: true
+
+      - name: Instalar cmprsk (solo lo usan los tests)
+        shell: Rscript {0}
+        run: |
+          repos <- getOption("repos")
+          if (is.null(repos) || identical(unname(repos["CRAN"]), "@CRAN@")) {
+            repos <- c(CRAN = "https://cloud.r-project.org")
+          }
+          install.packages("cmprsk", repos = repos)
+          library(cmprsk)
+          cat("survival", as.character(packageVersion("survival")),
+              "| cmprsk", as.character(packageVersion("cmprsk")), "\n")
+
+      - name: Tests
+        run: Rscript tests/run_tests.R
+
+      - name: Ejemplo mgus2
+        run: Rscript ejemplo_mgus2.R
+
+      - name: Plantilla
+        run: Rscript plantilla.R

@@ -1,0 +1,15 @@
+# R y RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+# Datos propios: nunca al repositorio. La plantilla los busca en datos/.
+datos/
+
+# Resultados generados; solo se versiona la figura que enseña el README.
+resultados/*
+!resultados/mgus2_figura.png
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

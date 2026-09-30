@@ -1,0 +1,11 @@
+# Referencia versionada para tests/run_tests.R; no editar a mano.
+# Generada con R version 4.3.3 (2024-02-29) y survival 3.5-8 llamando directamente a finegray() y coxph() sobre survival::mgus2 (edad + sexo).
+# Fine-Gray: coxph(Surv(fgstart, fgstop, fgstatus) ~ age + sex, weights = fgwt, cluster = id) sobre finegray(etype = 'pcm').
+# Cox por causa: coxph(Surv(etime, estado == k) ~ age + sex), k = 1 (PCM) y k = 2 (muerte sin PCM).
+model,outcome,term,coef,hr,lower,upper,p_value
+Fine-Gray,PCM,age,-0.0173017050751,0.982847109937,0.971922465520,0.993894550009,2.41473265548e-03
+Fine-Gray,PCM,sexM,-0.2597567914001,0.771239134986,0.536014477812,1.109689808682,1.61726005903e-01
+Cox por causa,PCM,age,0.0130385698250,1.013123942619,0.996856793129,1.029656546641,1.14388703517e-01
+Cox por causa,PCM,sexM,-0.0251377892943,0.975175534022,0.674013954399,1.410901533935,8.93886364781e-01
+Cox por causa,muerte,age,0.0648236635629,1.066970861954,1.059426849463,1.074568594176,1.06398034763e-71
+Cox por causa,muerte,sexM,0.3932258637315,1.481753025804,1.292553977949,1.698646297901,1.68238072112e-08
